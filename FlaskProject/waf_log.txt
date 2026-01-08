@@ -1,0 +1,141 @@
+================================================================================
+                    WAF 攻击拦截日志
+================================================================================
+日志创建时间: 2026-01-08 13:00:38
+================================================================================
+
+[2026-01-08 13:00:38] [INFO] 日志已被手动清空
+    操作者IP: 127.0.0.1
+    操作时间: 2026-01-08 13:00:38
+--------------------------------------------------------------------------------
+[2026-01-08 13:05:40] [INFO] WAF 规则加载成功
+    规则数量: 83
+--------------------------------------------------------------------------------
+[2026-01-08 13:05:40] [INFO] WAF 防火墙启动
+    监听端口: 9998
+    后端地址: http://dvwa:2222
+--------------------------------------------------------------------------------
+[2026-01-08 13:05:46] [INFO] WAF 规则加载成功
+    规则数量: 83
+--------------------------------------------------------------------------------
+[2026-01-08 13:05:46] [INFO] WAF 防火墙启动
+    监听端口: 9998
+    后端地址: http://dvwa:2222
+--------------------------------------------------------------------------------
+[2026-01-08 13:05:46] [INFO] WAF 规则加载成功
+    规则数量: 83
+--------------------------------------------------------------------------------
+[2026-01-08 13:05:46] [INFO] WAF 防火墙启动
+    监听端口: 9998
+    后端地址: http://dvwa:2222
+--------------------------------------------------------------------------------
+[2026-01-08 13:06:07] [ATTACK] 拦截到 Command Injection 攻击
+    攻击类型: Command Injection
+    匹配规则: ;\s*whoami
+    客户端IP: 127.0.0.1
+    请求方法: POST
+    请求路径: /vulnerabilities/exec/
+    完整URL: http://localhost:9998/vulnerabilities/exec/
+    攻击载荷: ip=127.0.0.1; whoami | Submit=Submit
+    User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+    Referer: http://localhost:9998/vulnerabilities/exec/
+--------------------------------------------------------------------------------
+[2026-01-08 13:06:17] [ATTACK] 拦截到 Command Injection 攻击
+    攻击类型: Command Injection
+    匹配规则: /etc/passwd
+    客户端IP: 127.0.0.1
+    请求方法: GET
+    请求路径: /vulnerabilities/fi/
+    完整URL: http://localhost:9998/vulnerabilities/fi/?page=../../../etc/passwd
+    攻击载荷: page=../../../etc/passwd
+    User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+    Referer: None
+--------------------------------------------------------------------------------
+[2026-01-08 13:06:26] [ATTACK] 拦截到 SQL Injection 攻击
+    攻击类型: SQL Injection
+    匹配规则: or\s*1\s*=\s*1
+    客户端IP: 127.0.0.1
+    请求方法: GET
+    请求路径: /vulnerabilities/sqli/
+    完整URL: http://localhost:9998/vulnerabilities/sqli/?id='+OR+1%3D1+--&Submit=Submit
+    攻击载荷: id=' OR 1=1 -- | Submit=Submit
+    User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+    Referer: http://localhost:9998/vulnerabilities/sqli/
+--------------------------------------------------------------------------------
+[2026-01-08 13:06:33] [ATTACK] 拦截到 SQL Injection 攻击
+    攻击类型: SQL Injection
+    匹配规则: select\s+.*\s+from
+    客户端IP: 127.0.0.1
+    请求方法: GET
+    请求路径: /vulnerabilities/sqli/
+    完整URL: http://localhost:9998/vulnerabilities/sqli/?id=1'+UNION+SELECT+user,password+FROM+users+--&Submit=Submit
+    攻击载荷: id=1' UNION SELECT user,password FROM users -- | Submit=Submit
+    User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+    Referer: http://localhost:9998/vulnerabilities/sqli/
+--------------------------------------------------------------------------------
+[2026-01-08 13:06:42] [ATTACK] 拦截到 SQL Injection 攻击
+    攻击类型: SQL Injection
+    匹配规则: #
+    客户端IP: 127.0.0.1
+    请求方法: GET
+    请求路径: /vulnerabilities/sqli_blind/
+    完整URL: http://localhost:9998/vulnerabilities/sqli_blind/?id=1'+AND+1%3D1+%23&Submit=Submit
+    攻击载荷: id=1' AND 1=1 # | Submit=Submit
+    User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+    Referer: http://localhost:9998/vulnerabilities/sqli_blind/
+--------------------------------------------------------------------------------
+[2026-01-08 13:06:54] [ATTACK] 拦截到 XSS 攻击
+    攻击类型: XSS
+    匹配规则: ＜script
+    客户端IP: 127.0.0.1
+    请求方法: GET
+    请求路径: /vulnerabilities/xss_d/
+    完整URL: http://localhost:9998/vulnerabilities/xss_d/?default=＜script＞alert('XSS')＜/script＞
+    攻击载荷: default=＜script＞alert('XSS')＜/script＞
+    User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+    Referer: None
+--------------------------------------------------------------------------------
+[2026-01-08 13:07:03] [ATTACK] 拦截到 XSS 攻击
+    攻击类型: XSS
+    匹配规则: javascript:
+    客户端IP: 127.0.0.1
+    请求方法: GET
+    请求路径: /vulnerabilities/xss_d/
+    完整URL: http://localhost:9998/vulnerabilities/xss_d/?default=＜a%20href="javascript:alert('XSS')"＞click＜/a＞
+    攻击载荷: default=＜a href="javascript:alert('XSS')"＞click＜/a＞
+    User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+    Referer: None
+--------------------------------------------------------------------------------
+[2026-01-08 13:07:12] [ATTACK] 拦截到 XSS 攻击
+    攻击类型: XSS
+    匹配规则: javascript:
+    客户端IP: 127.0.0.1
+    请求方法: GET
+    请求路径: /vulnerabilities/xss_r/
+    完整URL: http://localhost:9998/vulnerabilities/xss_r/?name=＜a+href%3D"javascript:alert('XSS')"＞click＜/a＞
+    攻击载荷: name=＜a href="javascript:alert('XSS')"＞click＜/a＞
+    User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+    Referer: http://localhost:9998/vulnerabilities/xss_r/
+--------------------------------------------------------------------------------
+[2026-01-08 13:07:22] [ATTACK] 拦截到 XSS 攻击
+    攻击类型: XSS
+    匹配规则: ＜script
+    客户端IP: 127.0.0.1
+    请求方法: GET
+    请求路径: /vulnerabilities/xss_d/
+    完整URL: http://localhost:9998/vulnerabilities/xss_d/?default=＜script＞alert('DOM')＜/script＞
+    攻击载荷: default=＜script＞alert('DOM')＜/script＞
+    User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+    Referer: None
+--------------------------------------------------------------------------------
+[2026-01-08 13:07:35] [ATTACK] 拦截到 XSS 攻击
+    攻击类型: XSS
+    匹配规则: onerror\s*=
+    客户端IP: 127.0.0.1
+    请求方法: POST
+    请求路径: /vulnerabilities/xss_s/
+    完整URL: http://localhost:9998/vulnerabilities/xss_s/
+    攻击载荷: txtName=English＜/o | mtxMessage=English＜/option＞＜/select＞＜img src=x onerror=alert( | btnSign=Sign Guestbook
+    User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+    Referer: http://localhost:9998/vulnerabilities/xss_s/
+--------------------------------------------------------------------------------
